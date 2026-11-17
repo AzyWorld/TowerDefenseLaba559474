@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://bc2wbh661erox"]
+
+[ext_resource type="Script" uid="uid://d1g8xpqhaywj4" path="res://scripts/components/ControllerComponent.cs" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://cl7h1uqg808do" path="res://scenes/bullet.tscn" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://qobotmgt8urg" path="res://scenes/towers/blueprint.tscn" id="3_dqkch"]
+[ext_resource type="Script" uid="uid://dfptd4f6ofjwj" path="res://scripts/components/HealthComponent.cs" id="3_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://w0jldnvb0rne" path="res://scenes/towers/tower.tscn" id="4_qlg0r"]
+[ext_resource type="PackedScene" uid="uid://cdkad4rnmn5vg" path="res://scenes/towers/ExplosionTower.tscn" id="5_smehm"]
+[ext_resource type="PackedScene" uid="uid://0onu1pfqvxya" path="res://scenes/towers/ChainTower.tscn" id="6_ur7pv"]
+[ext_resource type="PackedScene" uid="uid://cwtsxkuvshypx" path="res://scenes/towers/BossTower.tscn" id="7_y4r1p"]
+[ext_resource type="Script" uid="uid://d3uvv2o5uovkg" path="res://scripts/MetalManager.cs" id="9_ur7pv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8q0sx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1lj4"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_13qdw"]
+material = SubResource("StandardMaterial3D_b1lj4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_13qdw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xrivr"]
+material = SubResource("StandardMaterial3D_13qdw")
+size = Vector3(1.3102417, 0.18457031, 0.1772461)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhqgy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_13qdw"]
+material = SubResource("StandardMaterial3D_qhqgy")
+
+[node name="Player" type="CharacterBody3D" unique_id=1670270287 groups=["allies"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=239264228]
+shape = SubResource("CapsuleShape3D_8q0sx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=748904457]
+mesh = SubResource("CapsuleMesh_13qdw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=644104965]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.438, 0.199, -0.304)
+mesh = SubResource("BoxMesh_xrivr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D" unique_id=536750509]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.03, -0.573892, 0.08415577, 2.9802322e-08)
+mesh = SubResource("BoxMesh_13qdw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D" unique_id=396973351]
+transform = Transform3D(0.16, 0, 0, 0, 0.36, 0, 0, 0, 0.03, 0.16636525, -0.14770597, -0.069891065)
+mesh = SubResource("BoxMesh_13qdw")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1223376401]
+transform = Transform3D(0.9983917, -0.053440977, 0.018924432, 0, 0.3338067, 0.94264156, -0.056692787, -0.9411255, 0.33326983, -0.3631546, 21.037394, 7.0176535)
+current = true
+
+[node name="ControllerComponent" type="Node" parent="." unique_id=1810821501 node_paths=PackedStringArray("PlayerCamera", "BuildMenu", "metalManager")]
+script = ExtResource("1_g2els")
+PlayerCamera = NodePath("../Camera3D")
+BulletScene = ExtResource("2_g2els")
+BlueprintScene = ExtResource("3_dqkch")
+AvaibleTowers = Array[PackedScene]([ExtResource("4_qlg0r"), ExtResource("5_smehm"), ExtResource("6_ur7pv"), ExtResource("7_y4r1p")])
+BuildMenu = NodePath("../HUD/BuildMenu")
+metalManager = NodePath("../MetalManager")
+metadata/_custom_type_script = "uid://d1g8xpqhaywj4"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=64055519 node_paths=PackedStringArray("HealthLabel")]
+script = ExtResource("3_qhqgy")
+max_health = 300.0
+HealthLabel = NodePath("../HUD/Health")
+metadata/_custom_type_script = "uid://dfptd4f6ofjwj"
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=751740827]
+
+[node name="BuildMenu" type="VBoxContainer" parent="HUD" unique_id=1552300621]
+visible = false
+offset_left = -187.0
+offset_top = -30.0
+offset_right = -147.0
+offset_bottom = 10.0
+
+[node name="Label" type="Label" parent="HUD/BuildMenu" unique_id=1633632823]
+layout_mode = 2
+text = "Построить:"
+
+[node name="Towers" type="VBoxContainer" parent="HUD/BuildMenu" unique_id=1889823329]
+layout_mode = 2
+
+[node name="Close" type="Button" parent="HUD/BuildMenu" unique_id=1378442053]
+layout_mode = 2
+text = "Отмена"
+
+[node name="Health" type="Label" parent="HUD" unique_id=625357794]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Metal" type="Label" parent="HUD" unique_id=107220133]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+
+[node name="MetalManager" type="Node" parent="." unique_id=2129761504 node_paths=PackedStringArray("MetalLabel")]
+script = ExtResource("9_ur7pv")
+MetalLabel = NodePath("../HUD/Metal")
+metadata/_custom_type_script = "uid://d3uvv2o5uovkg"
+
+[connection signal="pressed" from="HUD/BuildMenu/Close" to="ControllerComponent" method="CloseBuildMenu"]

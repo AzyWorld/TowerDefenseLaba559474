@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cwtsxkuvshypx"]
+
+[ext_resource type="Script" uid="uid://dfptd4f6ofjwj" path="res://scripts/components/HealthComponent.cs" id="1_3swi1"]
+[ext_resource type="Script" uid="uid://bpicu1lxr5asv" path="res://scripts/components/VisibilityComponent.cs" id="2_vudnw"]
+[ext_resource type="Script" uid="uid://4kpvb2mkjh2h" path="res://scripts/components/ShootComponent.cs" id="3_7h1v8"]
+[ext_resource type="PackedScene" uid="uid://cl7h1uqg808do" path="res://scenes/bullet.tscn" id="4_fv877"]
+[ext_resource type="PackedScene" uid="uid://crx0c3lali1bj" path="res://scenes/DamagingComponents/chain_component.tscn" id="5_60y1t"]
+[ext_resource type="PackedScene" uid="uid://cfabliax44ayi" path="res://scenes/DamagingComponents/explosion_component.tscn" id="6_vudnw"]
+[ext_resource type="Script" uid="uid://b1jctbpjj3dfc" path="res://scripts/components/MetalComponent.cs" id="7_7h1v8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b1lj4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xrivr"]
+radius = 51.89
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mkf8s"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xrivr"]
+material = SubResource("StandardMaterial3D_mkf8s")
+
+[node name="BossTower" type="CharacterBody3D" unique_id=1005966706 groups=["allies"]]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="HealthComponent" type="Node" parent="." unique_id=755595072]
+script = ExtResource("1_3swi1")
+max_health = 600.0
+metadata/_custom_type_script = "uid://dfptd4f6ofjwj"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1779824566]
+shape = SubResource("CylinderShape3D_b1lj4")
+
+[node name="VisibilityComponent" type="Area3D" parent="." unique_id=1709241718]
+script = ExtResource("2_vudnw")
+metadata/_custom_type_script = "uid://bpicu1lxr5asv"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisibilityComponent" unique_id=116536029]
+shape = SubResource("SphereShape3D_xrivr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=658085375]
+mesh = SubResource("CylinderMesh_xrivr")
+
+[node name="ShootComponent" type="Node" parent="." unique_id=2079794242 node_paths=PackedStringArray("visibilityComponent")]
+script = ExtResource("3_7h1v8")
+visibilityComponent = NodePath("../VisibilityComponent")
+BulletScene = ExtResource("4_fv877")
+ShootingCooldown = 0.7
+BulletComponents = Array[PackedScene]([ExtResource("5_60y1t"), ExtResource("6_vudnw")])
+metadata/_custom_type_script = "uid://4kpvb2mkjh2h"
+
+[node name="MetalComponent" type="Node" parent="." unique_id=1227606277]
+script = ExtResource("7_7h1v8")
+Cost = 20
+metadata/_custom_type_script = "uid://b1jctbpjj3dfc"

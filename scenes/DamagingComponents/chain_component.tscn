@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://crx0c3lali1bj"]
+
+[ext_resource type="Script" uid="uid://dg6vxps4ljkor" path="res://scripts/components/DamagingComponents/ChainComponent.cs" id="1_4wfhs"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xrivr"]
+radius = 0.37281
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4wfhs"]
+radius = 5.966068
+
+[node name="ChainComponent" type="Area3D" unique_id=474835569 node_paths=PackedStringArray("DetectZone")]
+script = ExtResource("1_4wfhs")
+DetectZone = NodePath("DetectZone")
+metadata/_custom_type_script = "uid://c2l4mw1mqxr4k"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2042335533]
+shape = SubResource("SphereShape3D_xrivr")
+debug_color = Color(1, 1, 0, 1)
+
+[node name="DetectZone" type="Area3D" parent="." unique_id=1672376630]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectZone" unique_id=447434507]
+shape = SubResource("SphereShape3D_4wfhs")

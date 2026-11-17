@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b733r6lwfvvf0"]
+
+[ext_resource type="Script" uid="uid://c2l4mw1mqxr4k" path="res://scripts/components/DamageComponent.cs" id="1_0e1qh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xrivr"]
+radius = 0.37281
+
+[node name="DamageComponent" type="Area3D" unique_id=474835569]
+script = ExtResource("1_0e1qh")
+metadata/_custom_type_script = "uid://c2l4mw1mqxr4k"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2042335533]
+shape = SubResource("SphereShape3D_xrivr")
+debug_color = Color(1, 1, 0, 1)
