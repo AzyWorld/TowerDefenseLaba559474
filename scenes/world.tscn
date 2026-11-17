@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://bu6tpjo0klh0t"]
+
+[ext_resource type="PackedScene" uid="uid://bwi1eho82md4n" path="res://scenes/towers/Core.tscn" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://bc2wbh661erox" path="res://scenes/player.tscn" id="3_4wyf3"]
+[ext_resource type="Script" uid="uid://cx3gp20vjh1i3" path="res://scripts/Spawner.cs" id="3_k0juu"]
+[ext_resource type="PackedScene" uid="uid://caqi02y2m35lp" path="res://scenes/Enemies/Crawler.tscn" id="4_71j4m"]
+[ext_resource type="PackedScene" uid="uid://hrr3pviy2jej" path="res://scenes/Enemies/Shooter.tscn" id="5_71j4m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_b1lj4"]
+sky_top_color = Color(0.25622535, 0.31176907, 0.385854, 1)
+sky_horizon_color = Color(0.20906562, 0.17923622, 0.40018785, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.19361722, 0.19821075, 0.20740834, 1)
+
+[sub_resource type="Sky" id="Sky_13qdw"]
+sky_material = SubResource("ProceduralSkyMaterial_b1lj4")
+
+[sub_resource type="Environment" id="Environment_xrivr"]
+background_mode = 2
+background_energy_multiplier = 2.3
+sky = SubResource("Sky_13qdw")
+
+[node name="World" type="Node3D" unique_id=937590922 groups=["world"]]
+metadata/_edit_lock_ = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=256396874]
+transform = Transform3D(0.99999994, 0, 0, 0, -4.3711385e-08, 1, 0, -0.99999994, -4.371139e-08, 0, 20, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1043855298]
+environment = SubResource("Environment_xrivr")
+
+[node name="Player" parent="." unique_id=1670270287 instance=ExtResource("3_4wyf3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.313164)
+
+[node name="Core" parent="." unique_id=1005966706 instance=ExtResource("2_rwgxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.76155, 0, 1.6360188)
+
+[node name="Spawner" type="Node3D" parent="." unique_id=1725419711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 57.363388)
+script = ExtResource("3_k0juu")
+SpawnerCooldown = 6.0
+SceneToSpawn = ExtResource("4_71j4m")
+metadata/_custom_type_script = "uid://cx3gp20vjh1i3"
+
+[node name="Spawner2" type="Node3D" parent="." unique_id=174808134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.777092, 0, 57.363388)
+script = ExtResource("3_k0juu")
+SpawnerCooldown = 6.0
+SceneToSpawn = ExtResource("4_71j4m")
+metadata/_custom_type_script = "uid://cx3gp20vjh1i3"
+
+[node name="Spawner3" type="Node3D" parent="." unique_id=88656910]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.953423, 0, 57.363388)
+script = ExtResource("3_k0juu")
+SpawnerCooldown = 6.0
+SceneToSpawn = ExtResource("4_71j4m")
+metadata/_custom_type_script = "uid://cx3gp20vjh1i3"
+
+[node name="Spawner4" type="Node3D" parent="." unique_id=1867594097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.127521, 0, 72.30807)
+script = ExtResource("3_k0juu")
+SpawnerCooldown = 12.0
+SceneToSpawn = ExtResource("5_71j4m")
+metadata/_custom_type_script = "uid://cx3gp20vjh1i3"
+
+[node name="Crawler" parent="." unique_id=1065234738 instance=ExtResource("4_71j4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1099415, -1.9073486e-06, 50.84961)
+
+[node name="Crawler2" parent="." unique_id=134367848 instance=ExtResource("4_71j4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.891898, -1.9073486e-06, 50.84961)
+
+[node name="Crawler3" parent="." unique_id=1675484336 instance=ExtResource("4_71j4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3580494, -1.9073486e-06, 50.84961)
+
+[node name="Crawler4" parent="." unique_id=1739581365 instance=ExtResource("4_71j4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8599939, -1.9073486e-06, 50.84961)
+
+[node name="Crawler5" parent="." unique_id=1475270284 instance=ExtResource("4_71j4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.306473, -1.9073486e-06, 50.84961)
+
+[node name="Shooter" parent="." unique_id=2124539563 instance=ExtResource("5_71j4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7799525, 1.9073486e-06, 50.93416)

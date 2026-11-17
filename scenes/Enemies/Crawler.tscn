@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://caqi02y2m35lp"]
+
+[ext_resource type="Script" uid="uid://dfptd4f6ofjwj" path="res://scripts/components/HealthComponent.cs" id="1_nofpy"]
+[ext_resource type="Script" uid="uid://bpicu1lxr5asv" path="res://scripts/components/VisibilityComponent.cs" id="2_tstnt"]
+[ext_resource type="Script" uid="uid://cqmqd2r85nbqc" path="res://scripts/components/MoveComponent.cs" id="3_vhcu6"]
+[ext_resource type="Script" uid="uid://c2l4mw1mqxr4k" path="res://scripts/components/DamageComponent.cs" id="4_yccem"]
+[ext_resource type="Script" uid="uid://b1jctbpjj3dfc" path="res://scripts/components/MetalComponent.cs" id="5_tstnt"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b1lj4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xrivr"]
+radius = 51.89
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g767u"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xrivr"]
+material = SubResource("StandardMaterial3D_g767u")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fvs1j"]
+radius = 0.70703125
+
+[node name="Crawler" type="CharacterBody3D" unique_id=1005966706 groups=["enemies"]]
+
+[node name="HealthComponent" type="Node" parent="." unique_id=755595072]
+script = ExtResource("1_nofpy")
+max_health = 1000.0
+metadata/_custom_type_script = "uid://dfptd4f6ofjwj"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1779824566]
+shape = SubResource("CylinderShape3D_b1lj4")
+
+[node name="VisibilityComponent" type="Area3D" parent="." unique_id=1709241718]
+script = ExtResource("2_tstnt")
+metadata/_custom_type_script = "uid://bpicu1lxr5asv"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisibilityComponent" unique_id=116536029]
+shape = SubResource("SphereShape3D_xrivr")
+
+[node name="MoveComponent" type="Node" parent="." unique_id=1782681926 node_paths=PackedStringArray("visibilityComponent")]
+script = ExtResource("3_vhcu6")
+MoveSpeed = 300.0
+AttackDistance = -5.0
+visibilityComponent = NodePath("../VisibilityComponent")
+metadata/_custom_type_script = "uid://cqmqd2r85nbqc"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=658085375]
+mesh = SubResource("CylinderMesh_xrivr")
+
+[node name="DamageComponent" type="Area3D" parent="." unique_id=1636945542]
+script = ExtResource("4_yccem")
+targetGroup = "allies"
+metadata/_custom_type_script = "uid://c2l4mw1mqxr4k"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageComponent" unique_id=567078301]
+shape = SubResource("CylinderShape3D_fvs1j")
+
+[node name="MetalComponent" type="Node" parent="." unique_id=114581961]
+script = ExtResource("5_tstnt")
+Cost = 0
+metadata/_custom_type_script = "uid://b1jctbpjj3dfc"
